@@ -69,21 +69,23 @@ AZAN_FILES.forEach(azan => {
 
 // === Время намаза (используем API) ===
 async function fetchPrayerTimes(lat, lon) {
-  try {
-    const res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=2`);
-    const data = await res.json();
-    const times = data.data.timings;
-    let html = '<ul>';
-    for (const [name, time] of Object.entries(times)) {
-      html += `<li>${name}: ${time}</li>`;
-    }
-    html += '</ul>';
-    document.getElementById('prayer-times').innerHTML = html;
-  } catch (e) {
-    document.getElementById('prayer-times').textContent = 'Ошибка загрузки времени намаза.';
-  }
+try {
+// Метод 15 — ФМОР (Федерация мусульманских организаций России)
+// Метод 5 — ДУМ России (Москва)
+// Метод 8 — Татарстан (ДУМ РТ)
+const res = await fetch(`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lon}&method=15`);
+const data = await res.json();
+const times = data.data.timings;
+let html = '<ul>';
+for (const [name, time] of Object.entries(times)) {
+html += `<li>${name}: ${time}</li>`;
 }
-
+html += '</ul>';
+document.getElementById('prayer-times').innerHTML = html;
+} catch (e) {
+document.getElementById('prayer-times').textContent = 'Ошибка загрузки времени намаза.';
+}
+}
 // === Геолокация ===
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(pos => {
