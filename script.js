@@ -49,11 +49,11 @@ document.getElementById('custom-goal').addEventListener('input', e => {
 
 // === Азан ===
 const AZAN_FILES = [
-  { name: "Азан 1", file: "azan/azan1.mp3" },
-  { name: "Азан 2", file: "azan/azan2.mp3" },
-  // Добавь свои файлы
+  { name: "Азан 1", file: "azan1.mp3" },
+  { name: "Азан 2", file: "azan2.mp3" },
+  {  }
+  // добавь столько, сколько у тебя файлов
 ];
-
 const azanList = document.getElementById('azan-list');
 const azanPlayer = document.getElementById('azan-player');
 
